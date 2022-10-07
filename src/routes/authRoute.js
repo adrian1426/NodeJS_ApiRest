@@ -1,11 +1,12 @@
 const express = require('express');
+const { validatorRegister, validatorLogin } = require('../middlewares/authValidatorMiddleware');
 
 const router = express.Router();
 
-router.post('/login', (req, res) => {
+router.post('/login', validatorLogin, (req, res) => {
   res.send({ message: 'login' })
 });
-router.post('/register', (req, res) => {
+router.post('/register', validatorRegister, (req, res) => {
   res.send({ message: 'register' })
 });
 
