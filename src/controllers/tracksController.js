@@ -34,9 +34,21 @@ const addTrack = async (req, res) => {
   }
 };
 
+const updateTrackById = async (req, res) => {
+  try {
+    const { id, ...body } = matchedData(req);
+    const response = await trackModel.findByIdAndUpdate(id, body);
+
+    res.send({ message: 'Correcto', data: response });
+  } catch (error) {
+    handleHttpError(res, `Algo falló - ${error}`, 500);
+  }
+};
+
 module.exports = {
   getTracks,
   getTrackById,
-  addTrack
+  addTrack,
+  updateTrackById
 };
 
