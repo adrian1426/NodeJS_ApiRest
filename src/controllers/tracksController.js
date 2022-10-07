@@ -45,10 +45,23 @@ const updateTrackById = async (req, res) => {
   }
 };
 
+const deleteTrackById = async (req, res) => {
+  try {
+    req = matchedData(req);
+    const { id } = req;
+
+    const data = await trackModel.findByIdAndDelete(id);
+    res.send({ data });
+  } catch (error) {
+    handleHttpError(res, `Algo falló - ${error}`, 500);
+  }
+};
+
 module.exports = {
   getTracks,
   getTrackById,
   addTrack,
-  updateTrackById
+  updateTrackById,
+  deleteTrackById
 };
 
