@@ -11,6 +11,18 @@ const getTracks = async (req, res) => {
   }
 };
 
+const getTrackById = async (req, res) => {
+  try {
+    req = matchedData(req);
+    const { id } = req;
+
+    const data = await trackModel.findById(id);
+    res.send({ data });
+  } catch (error) {
+    handleHttpError(res, `Algo falló - ${error}`, 500);
+  }
+};
+
 const addTrack = async (req, res) => {
   try {
     const body = matchedData(req);
@@ -24,6 +36,7 @@ const addTrack = async (req, res) => {
 
 module.exports = {
   getTracks,
+  getTrackById,
   addTrack
 };
 

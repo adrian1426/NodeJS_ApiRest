@@ -18,6 +18,14 @@ const validatorAddTrack = [
   }
 ];
 
+const validatorGetTrackById = [
+  check('id').exists().notEmpty().isMongoId(),
+  (req, res, next) => {
+    return validatorResult(req, res, next);
+  }
+];
+
 module.exports = {
-  validatorAddTrack
+  validatorAddTrack,
+  validatorGetTrackById
 };
