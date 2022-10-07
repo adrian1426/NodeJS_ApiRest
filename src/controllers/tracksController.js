@@ -50,7 +50,7 @@ const deleteTrackById = async (req, res) => {
     req = matchedData(req);
     const { id } = req;
 
-    const data = await trackModel.findByIdAndDelete(id);
+    const data = await trackModel.delete({ _id: id });
     res.send({ data });
   } catch (error) {
     handleHttpError(res, `Algo falló - ${error}`, 500);
