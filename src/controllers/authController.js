@@ -1,6 +1,7 @@
 const { matchedData } = require('express-validator');
 const { userModel } = require('../models/mongo');
 const { encrypt, validate } = require('../utils/handlePassword');
+const { signToken } = require('../utils/handleJWT');
 
 const addUser = async (req, res) => {
   req = matchedData(req);
@@ -11,8 +12,15 @@ const addUser = async (req, res) => {
     password: pwdEncripted
   };
 
-  const response = await userModel.create(user);
-  response.set('password', undefined, { strict: false });
+  const resBdModel = await userModel.create(user);
+  resBdModel.set('password', undefined, { strict: false });
+
+  const userToken = await signToken(user);
+
+  const response = {
+    token: userToken,
+    user: resBdModel
+  };
 
   res.send({ message: 'register', data: response });
 };
