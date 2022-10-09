@@ -22,7 +22,9 @@
     "mongoose": "^6.6.3",
     "mongoose-delete": "^0.5.4",
     "morgan-body": "^2.6.8",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "sequelize": "^6.24.0",
+    "tedious": "^15.1.0"
   },
   "devDependencies": {
     "eslint": "^8.24.0",

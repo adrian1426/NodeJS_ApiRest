@@ -4,10 +4,13 @@ const express = require('express');
 const cors = require('cors');
 const morganBody = require('morgan-body');
 const dbMongoConnect = require('./src/config/mongoConfig');
+const { dbConnectMSSQL } = require('./src/config/mssqlConfig');
 const routes = require('./src/routes');
 const { loggerStream } = require('./src/utils/handleMorganIntercep');
 
 const PORT = process.env.PORT || 8080;
+const ENGINE_DB = process.env.ENGINE_DB;
+
 const app = express();
 
 app.use(cors());
@@ -28,4 +31,8 @@ app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
 
-dbMongoConnect();
+if (ENGINE_DB === 'SQL') {
+  dbConnectMSSQL();
+} else {
+  dbMongoConnect();
+}
