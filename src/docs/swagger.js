@@ -11,6 +11,18 @@ const swaggerDefinition = {
   ],
   components: {
     schemas: {
+      login: {
+        type: 'object',
+        required: ['email', 'password'],
+        properties: {
+          email: {
+            type: 'string'
+          },
+          password: {
+            type: 'string'
+          }
+        }
+      },
       track: {
         type: 'object',
         required: ['name', 'album'],
@@ -66,9 +78,7 @@ const swaggerDefinition = {
 
 const options = {
   swaggerDefinition,
-  apis: [
-    "./routes/*.js"
-  ]
+  apis: ['./routes/*.js']
 };
 
 const openApiConfig = swaggerJsDoc(options);
