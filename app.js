@@ -28,8 +28,11 @@ morganBody(app, {
   }
 });
 
+const options = {
+  explorer: true
+};
 
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsDoc));
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsDoc, options));
 app.use(routes);
 
 app.listen(PORT, () => {
