@@ -10,6 +10,9 @@ apiRoutes.use('/tracks', tracksRoute);
 apiRoutes.use('/storage', storageRoute);
 apiRoutes.use('/auth', authRoute);
 
+apiRoutesBase.get('/status', (req, res) => {
+  res.send({ mesasage: 'App up' })
+})
 apiRoutesBase.use('/v1/api', apiRoutes);
 
 module.exports = apiRoutesBase;
