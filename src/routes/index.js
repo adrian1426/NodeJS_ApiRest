@@ -14,5 +14,8 @@ apiRoutesBase.get('/status', (req, res) => {
   res.send({ mesasage: 'App up' })
 })
 apiRoutesBase.use('/v1/api', apiRoutes);
+apiRoutesBase.use((req, res) => {
+  res.send({ mesage: '404' })
+})
 
 module.exports = apiRoutesBase;
