@@ -13,12 +13,20 @@ const swaggerJsDoc = require('./src/docs/swagger');
 
 const PORT = process.env.PORT || 8080;
 const ENGINE_DB = process.env.ENGINE_DB;
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use(express.static('src/storage'));
+
+const options = {
+  explorer: true
+};
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsDoc, options));
+app.use(routes);
 
 morganBody(app, {
   noColors: true,
@@ -28,19 +36,16 @@ morganBody(app, {
   }
 });
 
-const options = {
-  explorer: true
-};
-
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerJsDoc, options));
-app.use(routes);
-
-app.listen(PORT, () => {
-  console.log(`App listening on port ${PORT}`);
-});
+if (NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}`);
+  });
+}
 
 if (ENGINE_DB === 'SQL') {
   dbConnectMSSQL();
 } else {
   dbMongoConnect();
 }
+
+module.exports = app;
