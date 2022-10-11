@@ -2,7 +2,7 @@ const request = require('supertest');
 const app = require('../../app');
 
 describe('[AUTH] test de /auth/login', () => {
-  test('should be 404', async () => {
+  test('should be 200', async () => {
     const response = await request(app)
       .post('/v1/api/auth/login')
       .send({
@@ -10,10 +10,10 @@ describe('[AUTH] test de /auth/login', () => {
         password: 'Adrian.1426'
       });
 
-    expect(response.statusCode).toEqual(404);
+    expect(response.statusCode).toEqual(200);
   });
 
-  test('should be 200 - user register', async () => {
+  test('should be 500 - user register ', async () => {
     const response = await request(app)
       .post('/v1/api/auth/register')
       .send({
@@ -23,6 +23,6 @@ describe('[AUTH] test de /auth/login', () => {
         name: 'Adrian'
       });
 
-    expect(response.statusCode).toEqual(200);
+    expect(response.statusCode).toEqual(500);
   });
 }); 
