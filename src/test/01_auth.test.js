@@ -1,5 +1,10 @@
 const request = require('supertest');
+const mongoose = require('mongoose');
 const app = require('../../app');
+
+afterAll(() => {
+  mongoose.connection.close();
+});
 
 describe('[AUTH] test de /auth/login', () => {
   test('should be 200', async () => {

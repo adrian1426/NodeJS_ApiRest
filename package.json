@@ -41,6 +41,7 @@
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
-    ]
+    ],
+    "globalTeardown": "./global.kill.js"
   }
 }
