@@ -48,5 +48,8 @@
       "json",
       "html"
     ]
+  },
+  "engines": {
+    "node": "16.x"
   }
 }
