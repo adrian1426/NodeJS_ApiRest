@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
+    "start:prod": "pm2 start app.js --name=apppm2",
     "start:dev": "nodemon app.js",
-    "test": "cross-env NODE_ENV=test jest --watch --silent",
+    "test": "cross-env NODE_ENV=test jest a --watch --silent --runInBand --no-color 2>test-ouput.log",
     "coverage": "npm run test -- --coverage a"
   },
   "keywords": [],
